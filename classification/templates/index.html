@@ -1,0 +1,38 @@
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+{% load static %} <!-- New line -->
+
+<style> 
+.input_data{ float:left} 
+.res_display{ float: center}
+.iris_img{ float:right}
+/* .aaa1,.aaa2,.aaa3,.aaa4简写 作用：共用 float:left样式 */ 
+</style> 
+
+<h1 align="center">基于Microsoft Azure Machine Learning 的鸢尾花分类演示</h1>
+
+<div class="input_data">
+	花萼长度:&nbsp;<input type="text" name="Col1" align="center" value="5.1"> <br>
+	花萼宽度:&nbsp;<input type="text" name="Col2" align="center" value="3.5"> <br>  
+	花瓣长度:&nbsp;<input type="text" name="Col3" align="center" value="1.4"> <br>  
+	花瓣宽度:&nbsp;<input type="text" name="Col4" align="center" value="0.2"> <br><br>  
+    <button type="submit" align="center">分  类</button>
+</div>
+
+<div class="res_display">
+    <h2 align="center">分类结果将在这里显示:</h2>
+    <h3 style="color:#F00" align="center">{{ res_class }}</h3>
+</div>
+<br><br>
+
+<!-- New line -->
+<div class="iris_img">
+	<img src="{% static 'img/iris.jpg' %}">
+</div>
+<br><br>
+
+{% if res_class %}
+	<div style="color:#F00" align="left">{% include 'echarts.html' %}</div>
+{% endif %}
+
+</form>
